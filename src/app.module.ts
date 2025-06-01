@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { join } from 'path';
 import { PrismaModule } from './prisma/prisma.module';
 import { VideosModule } from './videos/videos.module';
+import { ArtistsModule } from './artists/artists.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
@@ -11,6 +12,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
   imports: [
     PrismaModule,
     VideosModule,
+    ArtistsModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/shema.gql'),

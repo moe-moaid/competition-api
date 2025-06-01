@@ -1,4 +1,3 @@
-
 import { Resolver, Query } from '@nestjs/graphql';
 import { VideosService } from './videos.service';
 import { Video } from './entities/video.entity';
