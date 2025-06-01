@@ -7,6 +7,10 @@ export class ArtistsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAll(): Promise<Artist[]> {
-    return this.prisma.artist.findMany();
+    return this.prisma.artist.findMany({
+      include: {
+        videos: true,
+      },
+    });
   }
 }

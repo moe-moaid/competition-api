@@ -10,8 +10,8 @@ export class Artist {
   @Field()
   name: string;
 
-  @Field()
-  age: number;
+  @Field(() => Int, { nullable: true })
+  age?: number;
 
   @Field()
   email: string;
@@ -22,11 +22,11 @@ export class Artist {
   @Field()
   password: string;
 
-  @Field(() => ArtistLocation)
-  location: ArtistLocation
+  @Field(() => Int, { nullable: true })
+  locationId?: number;
 
-    @Field(() => [Video])
-    videos: Video
+  @Field(() => [Video])
+  videos: Video[];
 
   @Field()
   createdAt: Date;
