@@ -18,6 +18,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       autoSchemaFile: join(process.cwd(), 'src/shema.gql'),
       playground: true,
       introspection: true,
+      path: '/api/data',
     }),
   ],
   controllers: [AppController],
