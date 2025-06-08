@@ -14,6 +14,7 @@ export class VideosController {
             storage: diskStorage({
                 destination: './uploads/videos',
                 filename: (req, file, callback) => {
+                    console.log('my file ==', file);
                     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
                     callback(null, `video-${uniqueSuffix}${extname(file.originalname)}`);
                 },
@@ -22,6 +23,8 @@ export class VideosController {
                 if (!file.mimetype.match(/\/(mp4|avi|mkv|mov|webm)$/)) {
                     return callback(new Error('Only video files are allwed!'), false);
                 }
+                console.log('mainFunc ===', file);
+                
                 callback(null, true);
             },
             limits: {
@@ -29,7 +32,9 @@ export class VideosController {
             },
         }),
     )
-    async uploadVideo(@UploadedFile() file: Express.Multer.File) {
+    async uploadVideo(@UploadedFile() file: Express.Multer.File, @Body() body: any) {
+        console.log('fileName ===', file);
+        
         return {
             fileName: file.filename,
             originalName: file.originalname,

@@ -18,13 +18,13 @@ export class VideosService {
     });
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     return this.prisma.video.findUnique({
       where: { id },
     });
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     return this.prisma.video.delete({
       where: { id },
     });

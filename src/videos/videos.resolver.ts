@@ -18,12 +18,12 @@ export class VideosResolver {
   }
 
   @Query(() => Video, { name: 'video' })
-  async findeOne(@Args('id') id: string) {
+  async findeOne(@Args('id') id: number) {
     return this.videosService.findOne(id);
   }
 
   @Mutation(() => Video)
-  async removeVideo(@Args('id') id: string) {
+  async removeVideo(@Args('id') id: number) {
     return this.videosService.remove(id);
   }
 
