@@ -3,9 +3,14 @@
 # ------------------------------------------------------
 
 type Video {
-  id: Int!
+  id: ID!
   title: String!
-  url: String!
+  category: String!
+  description: String!
+  filename: String!
+  filePath: String!
+  thumbnail: String
+  videoUrl: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -30,5 +35,21 @@ type Artist {
 
 type Query {
   videos: [Video!]!
+  video(id: Float!): Video!
   artists: [Artist!]!
+}
+
+type Mutation {
+  createVideo(createVideoInput: CreateVideoDto!): Video!
+  removeVideo(id: Float!): Video!
+}
+
+input CreateVideoDto {
+  title: String!
+  description: String!
+  filename: String!
+  filePath: String!
+  url: String!
+  artistId: Float!
+  thumbnail: String
 }
