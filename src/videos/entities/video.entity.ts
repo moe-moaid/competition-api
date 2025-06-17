@@ -1,15 +1,30 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 
 @ObjectType()
 export class Video {
-  @Field(() => Int)
-  id: number;
+  @Field(() => ID)
+  id: string;
 
   @Field()
   title: string;
 
   @Field()
-  url: string;
+  category: 'hipPop' | 'rap' | 'rnb' | 'afrobeat' | 'raggae' | 'dancehall' | 'reggarton' | 'others'
+
+  @Field()
+  description: string;
+
+  @Field()
+  filename: string;
+
+  @Field()
+  filePath: string;
+
+  @Field({ nullable: true })
+  thumbnail?: string;
+
+  @Field()
+  videoUrl: string; // Computed one
 
   @Field()
   createdAt: Date;
