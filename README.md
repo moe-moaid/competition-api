@@ -32,17 +32,32 @@
 $ yarn install
 ```
 
-## Running the app
+## Running the app locally
 
 ```bash
-# development
-$ yarn run start
+# 1. create database with psql
+CREATE USER db_username WITH PASSWORD db_password;
+CREATE DATABASE db_name OWNER db_username;
+ALTER USER moe CREATEDB;
+
+# 2. migrate prisma to create the DB
+npx prisma generate
+npx prisma migrate dev
+
+# 3. start the nest server
+yarn start
 
 # watch mode
 $ yarn run start:dev
 
 # production mode
 $ yarn run start:prod
+```
+
+## Evnironment variables
+make sure to have a `.env` file in your root directory that has this variable:
+```bash
+DATABASE_URL="postgresql://db_username:db_password@localhost:postgre_port/db_name?schema=public"
 ```
 
 ## Test
