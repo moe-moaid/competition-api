@@ -15,10 +15,7 @@ export class Video {
   description: string;
 
   @Field()
-  filename: string;
-
-  @Field()
-  filePath: string;
+  videoName: string;
 
   @Field({ nullable: true })
   thumbnail?: string;

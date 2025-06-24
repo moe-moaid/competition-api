@@ -30,6 +30,6 @@ export class VideosResolver {
   // Compute Video URL field
   @ResolveField(() => String)
   videoUrl(@Parent() video: Video): string {
-    return `http://localhost:7567${video.filePath}`;
+    return `http://localhost:7567${video.videoUrl}`;
   }
 }
