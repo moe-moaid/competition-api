@@ -17,6 +17,8 @@ datasource db {
 model Video {
   id          Int      @id @default(autoincrement())
   title       String
+  description String
+  category    String
   url         String
   artistId    Int
   artist      Artist   @relation(fields: [artistId], references: [id])
@@ -25,20 +27,22 @@ model Video {
 }
 
 model Artist {
-  id          Int      @id @default(autoincrement())
-  name        String
-  age         Int?
-  email       String   @unique
-  phone       String
-  password    String
-  locationId  Int?     
-  videos      Video[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  name       String
+  age        Int?
+  email      String   @unique
+  phone      String
+  password   String
+  locationId Int      @unique
+  videos     Video[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  location   Location @relation(fields: [locationId], references: [id])
 }
 
 model Location {
-  id          Int @id @default(autoincrement())
-  country     String
-  address     String
+  id      Int     @id @default(autoincrement())
+  country String
+  address String
+  artist  Artist?
 }

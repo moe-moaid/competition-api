@@ -1,25 +1,20 @@
-import { InputType, Field } from '@nestjs/graphql';
+import { IsString, IsInt, IsNotEmpty, } from 'class-validator';
 
-@InputType()
 export class CreateVideoDto {
-  @Field()
+  @IsString()
+  @IsNotEmpty()
   title: string;
 
-  @Field()
+  @IsString()
+  @IsNotEmpty()
   description: string;
 
-  @Field()
-  filename: string;
+  @IsString()
+  @IsNotEmpty()
+  category: string;
 
-  @Field()
-  filePath: string;
-
-  @Field()
-  url: string;
-
-  @Field()
+  @IsInt()
+  @IsNotEmpty()
   artistId: number;
-
-  @Field({ nullable: true })
-  thumbnail?: string;
+  
 }

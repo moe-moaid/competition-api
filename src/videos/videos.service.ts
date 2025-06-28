@@ -12,9 +12,16 @@ export class VideosService {
     return this.prisma.video.findMany();
   }
 
-  async create(createVideoDto: CreateVideoDto) {
+  async UploadVideo(dto: CreateVideoDto, filePath: string) {
     return this.prisma.video.create({
-      data: createVideoDto,
+      data: {
+        title: dto.title,
+        description: dto.description,
+        artistId: dto.artistId,
+        category: dto.category,
+        url: filePath,
+
+      }
     });
   }
 

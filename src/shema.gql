@@ -2,14 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Video {
-  id: ID!
-  title: String!
-  category: String!
-  description: String!
-  videoName: String!
-  thumbnail: String
-  videoUrl: String!
+type Artist {
+  id: Int!
+  name: String!
+  age: Int
+  email: String!
+  phone: String!
+  password: String!
+  locationId: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -19,36 +19,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type Artist {
-  id: Int!
-  name: String!
-  age: Int
-  email: String!
-  phone: String!
-  password: String!
-  locationId: Int
-  videos: [Video!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
 type Query {
-  videos: [Video!]!
-  video(id: Float!): Video!
   artists: [Artist!]!
-}
-
-type Mutation {
-  createVideo(createVideoInput: CreateVideoDto!): Video!
-  removeVideo(id: Float!): Video!
-}
-
-input CreateVideoDto {
-  title: String!
-  description: String!
-  filename: String!
-  filePath: String!
-  url: String!
-  artistId: Float!
-  thumbnail: String
 }
