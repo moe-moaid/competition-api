@@ -6,4 +6,3 @@ async function bootstrap() {
   await app.listen(7567);
 }
 bootstrap();
-// const app = await NestFactory.create(new ValidationPipe({whitelist: true, forbidNonWhitelisted: true}),AppModule, { cors: true });

@@ -5,6 +5,7 @@ import { join } from 'path';
 import { PrismaModule } from './prisma/prisma.module';
 import { VideosModule } from './videos/videos.module';
 import { ArtistsModule } from './artists/artists.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
@@ -13,6 +14,10 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
     PrismaModule,
     VideosModule,
     ArtistsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'uploads'),
+      serveRoot: '/uploads'
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/shema.gql'),
