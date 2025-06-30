@@ -9,7 +9,13 @@ export class VideosService {
   constructor(private prisma: PrismaService) {}
 
   async findAll(): Promise<Video[]> {
-    return this.prisma.video.findMany();
+    return this.prisma.video.findMany({
+      include: {
+        artist: {
+          select: {name: true, location: {select:{country: true}}}
+        }
+      }
+    });
   }
 
   async UploadVideo(dto: CreateVideoDto, filePath: string) {
