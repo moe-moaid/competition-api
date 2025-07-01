@@ -25,6 +25,9 @@ export class Artist {
   locationId?: number;
 
   @Field()
+  avatarId: string;
+
+  @Field()
   createdAt: Date;
 
   @Field()

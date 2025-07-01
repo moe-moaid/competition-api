@@ -8,12 +8,14 @@ import { ArtistsModule } from './artists/artists.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { AvatarsModule } from './avatars/avatars.module';
 
 @Module({
   imports: [
     PrismaModule,
     VideosModule,
     ArtistsModule,
+    AvatarsModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'uploads'),
       serveRoot: '/uploads'

@@ -1,4 +1,3 @@
-
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Video } from '@prisma/client';
@@ -12,9 +11,13 @@ export class VideosService {
     return this.prisma.video.findMany({
       include: {
         artist: {
-          select: {name: true, location: {select:{country: true}}}
-        }
-      }
+          select: {
+            name: true,
+            location: { select: { country: true } },
+            avatar: { select: { url: true } },
+          },
+        },
+      },
     });
   }
 
@@ -26,8 +29,7 @@ export class VideosService {
         artistId: dto.artistId,
         category: dto.category,
         url: filePath,
-
-      }
+      },
     });
   }
 

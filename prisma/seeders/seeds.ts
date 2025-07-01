@@ -1,14 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
-
 // This funciton creates dummy data for testing
-async function main() {
-  //Clear Existing Data:
-  await prisma.video.deleteMany();
-  await prisma.artist.deleteMany();
-  await prisma.location.deleteMany();
-
+export async function seed(prisma: PrismaClient) {
   // Define Dummy Locations
   const locations = [
     { country: 'USA', address: '123 Main St, New York, NY 10001' },
@@ -16,6 +9,14 @@ async function main() {
     { country: 'Canada', address: '789 Maple Ave, Toronto, ON M5V 2T6' },
     { country: 'Australia', address: '321 Ocean Rd, Sydney, NSW 2000' },
     { country: 'Germany', address: '654 Berliner Str, Berlin, 10115' },
+  ];
+
+  const avatars = [
+    { url: "uploads/avatars/av-1.jpeg"},
+    { url: "uploads/avatars/av-2.jpeg"},
+    { url: "uploads/avatars/av-3.jpeg"},
+    { url: "uploads/avatars/av-4.jpeg"},
+    { url: "uploads/avatars/av-5.jpeg"},
   ];
 
   // Define Dummy Artists
@@ -64,10 +65,14 @@ async function main() {
     const location = await prisma.location.create({
       data: locations[i],
     });
+    const avatar = await prisma.avatar.create({
+        data: avatars[i],
+    })
     const artist = await prisma.artist.create({
       data: {
         ...artistsData[i],
         locationId: location.id,
+        avatarId: avatar.id,
       },
     });
     artists.push(artist);
@@ -105,10 +110,4 @@ async function main() {
   );
 }
 
-main()
-  .catch((error: any) => {
-    throw new Error(`Seeding faild: ${error.message}`);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+

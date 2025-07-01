@@ -34,10 +34,12 @@ model Artist {
   phone      String
   password   String
   locationId Int      @unique
+  avatarId   Int      @unique
   videos     Video[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   location   Location @relation(fields: [locationId], references: [id])
+  avatar     Avatar   @relation(fields: [avatarId], references: [id])
 }
 
 model Location {
@@ -45,4 +47,10 @@ model Location {
   country String
   address String
   artist  Artist?
+}
+
+model Avatar {
+  id     Int     @id @default(autoincrement())
+  url    String
+  artist Artist?
 }
