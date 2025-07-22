@@ -12,11 +12,11 @@ export async function seed(prisma: PrismaClient) {
   ];
 
   const avatars = [
-    { url: "uploads/avatars/av-1.jpeg"},
-    { url: "uploads/avatars/av-2.jpeg"},
-    { url: "uploads/avatars/av-3.jpeg"},
-    { url: "uploads/avatars/av-4.jpeg"},
-    { url: "uploads/avatars/av-5.jpeg"},
+    { url: "uploads/avatars/av-1.png"},
+    { url: "uploads/avatars/av-2.png"},
+    { url: "uploads/avatars/av-3.png"},
+    { url: "uploads/avatars/av-4.png"},
+    { url: "uploads/avatars/av-5.png"},
   ];
 
   // Define Dummy Artists
@@ -96,7 +96,7 @@ export async function seed(prisma: PrismaClient) {
     const artist = artists[i % artists.length];
     const video = await prisma.video.create({
       data: {
-        title: `Video ${i + 1} by ${artist.name}`,
+        title: `Video ${i + 1} Title`,
         description: `Description for video ${i + 1}, a ${categories[i % categories.length]} masterpiece.`,
         category: categories[i % categories.length],
         url: `uploads/videos/video-${i}.mp4`,
@@ -106,7 +106,7 @@ export async function seed(prisma: PrismaClient) {
   }
 
   console.log(
-    'Database seeded successfully with 5 artists, 5 locations, and 21 videos.',
+    '🌱 Seeding completed!',
   );
 }
 
