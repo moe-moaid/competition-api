@@ -9,6 +9,8 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AvatarsModule } from './avatars/avatars.module';
+import { VotesService } from './votes/votes.service';
+import { VotesModule } from './votes/votes.module';
 
 @Module({
   imports: [
@@ -27,8 +29,9 @@ import { AvatarsModule } from './avatars/avatars.module';
       introspection: true,
       path: '/api/data',
     }),
+    VotesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, VotesService],
 })
 export class AppModule {}

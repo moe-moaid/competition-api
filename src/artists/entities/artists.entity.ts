@@ -1,6 +1,4 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { ArtistLocation } from './location.entity';
-
 @ObjectType()
 export class Artist {
   @Field(() => Int)

@@ -24,6 +24,7 @@ model Video {
   artist      Artist   @relation(fields: [artistId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  Vote        Vote[]
 }
 
 model Artist {
@@ -53,4 +54,10 @@ model Avatar {
   id     Int     @id @default(autoincrement())
   url    String
   artist Artist?
+}
+
+model Vote {
+  id      Int   @id @default(autoincrement())
+  videoId Int
+  video   Video @relation(fields: [videoId], references: [id])
 }
