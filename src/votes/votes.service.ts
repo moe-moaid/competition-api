@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Vote } from '@prisma/client';
 
@@ -11,6 +15,18 @@ export class VotesService {
   }
 
   async castVote(videoId: number): Promise<Vote> {
+    if (!videoId || Number.isNaN(videoId)) {
+      throw new BadRequestException('Video id is required');
+    }
+
+    const videoExists = await this.prisma.video.findUnique({
+      where: { id: videoId },
+    });
+
+    if (!videoExists) {
+      throw new NotFoundException(`Video with id ${videoId} not found`);
+    }
+
     return this.prisma.vote.create({
       data: {
         videoId,
