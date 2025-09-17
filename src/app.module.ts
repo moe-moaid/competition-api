@@ -11,6 +11,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AvatarsModule } from './avatars/avatars.module';
 import { VotesService } from './votes/votes.service';
 import { VotesModule } from './votes/votes.module';
+import { PaymentsModule } from './payments/payments.module';
+import { StripeService } from './stripe/stripe.service';
 
 @Module({
   imports: [
@@ -30,8 +32,9 @@ import { VotesModule } from './votes/votes.module';
       path: '/api/data',
     }),
     VotesModule,
+    PaymentsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, VotesService],
+  providers: [AppService, VotesService, StripeService],
 })
 export class AppModule {}
