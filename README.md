@@ -73,6 +73,13 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+## EAch time after modifing the schema you need to:
+```bash
+npx prisma format
+npx prisma generate
+npx prisma migrate dev --name discriptive-name-for-the-migration
+yarn start:dev
+```
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
