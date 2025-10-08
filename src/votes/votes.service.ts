@@ -15,14 +15,17 @@ export class VotesService {
   }
 
   async castVote(videoId: number): Promise<Vote> {
+    
     if (!videoId || Number.isNaN(videoId)) {
       throw new BadRequestException('Video id is required');
     }
+    // console.log("videoid ===", videoId)
 
     const videoExists = await this.prisma.video.findUnique({
       where: { id: videoId },
-    });
+    }) ? true : false;
 
+    console.log('*****castVote*****', videoId, videoExists);
     if (!videoExists) {
       throw new NotFoundException(`Video with id ${videoId} not found`);
     }
