@@ -6,7 +6,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Controller('webhook')
 export class WebhookController {
-  private stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  private stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: '2025-08-27.basil',
   });
 
@@ -22,8 +22,6 @@ export class WebhookController {
     @Headers('stripe-signature') sig: string,
   ) {
     let event: Stripe.Event;
-    console.log('stripe hook');
-
     try {
       event = this.stripe.webhooks.constructEvent(
         req.body,
@@ -39,7 +37,7 @@ export class WebhookController {
       const videoId = Number(intent.metadata.videoId);
 
       // Find and update the payment record using the Stripe payment intent ID
-      const payment = await this.prisma.Payment.update({
+      const payment = await this.prisma.payment.update({
         where: { stripePaymentIntentId: intent.id },
         data: { status: 'SUCCEEDED' },
       });
@@ -47,17 +45,11 @@ export class WebhookController {
       // Cast the vote
       const vote = await this.voteService.castVote(videoId);
 
-      console.log('*** successful payment ***');
-
       // Link the payment to the vote
-      await this.prisma.Payment.update({
+      await this.prisma.payment.update({
         where: { id: payment.id },
         data: { voteId: vote.id },
       });
-
-      console.log(
-        `✅ Vote cast for videoId=${videoId} after successful payment`,
-      );
     }
 
     res.json({ received: true });

@@ -16,10 +16,6 @@ export class PaymentsService {
    * @param amount charging fee - $3
    */
   async createPaymentIntent(videoId: number, amount = 300): Promise<string> {
-    // you can store prices somewhere else, hardcode here for example purposes
-    const currency = 'usd';
-    console.log('*****createPaymentIntent called*****', videoId, amount);
-
     const intent = await this.stripe.paymentIntents.create({
       amount,
       currency: 'usd',

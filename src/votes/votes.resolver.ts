@@ -10,5 +10,12 @@ export class VoteResolver {
   findAll() {
     return this.votesService.findAll();
   }
+
+  @Mutation(() => Vote)
+  castVote(
+    @Args('videoId', { type: () => Int }) videoId: number,
+  ) {
+    return this.votesService.castVote(videoId);
+  }
 }
 
