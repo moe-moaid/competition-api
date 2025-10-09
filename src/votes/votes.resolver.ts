@@ -12,10 +12,7 @@ export class VoteResolver {
   }
 
   @Mutation(() => Vote)
-  castVote(
-    @Args('videoId', { type: () => Int }) videoId: number,
-  ) {
+  castVote(@Args('videoId', { type: () => Int }) videoId: number) {
     return this.votesService.castVote(videoId);
   }
 }
-

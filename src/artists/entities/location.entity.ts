@@ -2,12 +2,12 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class ArtistLocation {
-    @Field(() => Int)
-    id: number;
+  @Field(() => Int)
+  id: number;
 
-    @Field()
-    country: string;
+  @Field()
+  country: string;
 
-    @Field()
-    address: string;
+  @Field()
+  address: string;
 }

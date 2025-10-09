@@ -28,7 +28,12 @@ export class AvatarController {
       }),
       fileFilter: (req, file, callback) => {
         if (!file.mimetype.match(/\/(jpeg|png|jpg)$/)) {
-          return callback(new Error('Only images with jpeg, png, or jpg extension are allwed!'), false);
+          return callback(
+            new Error(
+              'Only images with jpeg, png, or jpg extension are allwed!',
+            ),
+            false,
+          );
         }
         callback(null, true);
       },
@@ -37,9 +42,7 @@ export class AvatarController {
       },
     }),
   )
-  async uploadImage(
-    @UploadedFile() file: Express.Multer.File,
-  ) {
+  async uploadImage(@UploadedFile() file: Express.Multer.File) {
     const filePath = `uploads/avatars/${file.filename}`;
     const avatar = await this.avatarService.UploadImage(filePath); // Actually save to DB
 

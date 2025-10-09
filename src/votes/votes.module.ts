@@ -7,7 +7,6 @@ import { PaymentsModule } from 'src/payments/payments.module';
 @Module({
   imports: [PrismaModule, forwardRef(() => PaymentsModule)],
   providers: [VoteResolver, VotesService],
-  exports: [VotesService]
+  exports: [VotesService],
 })
 export class VotesModule {}
-

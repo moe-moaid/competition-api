@@ -1,4 +1,3 @@
-
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Avatar } from '@prisma/client';
@@ -11,17 +10,17 @@ export class AvatarService {
     return this.prisma.avatar.findMany({
       include: {
         artist: {
-          select: {name: true, location: {select:{country: true}}}
-        }
-      }
+          select: { name: true, location: { select: { country: true } } },
+        },
+      },
     });
   }
 
   async UploadImage(url: string) {
     return this.prisma.avatar.create({
       data: {
-        url
-      }
+        url,
+      },
     });
   }
 
