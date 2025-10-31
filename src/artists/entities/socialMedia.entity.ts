@@ -1,13 +1,12 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-
 @ObjectType()
-export class ArtistLocation {
+export class SocialMedia {
   @Field(() => Int)
   id: number;
 
   @Field()
-  country: string;
+  platform: string;
 
   @Field()
-  address: string;
+  link: string;
 }

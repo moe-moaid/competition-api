@@ -18,10 +18,11 @@ export class VotesService {
     if (!videoId || Number.isNaN(videoId)) {
       throw new BadRequestException('Video id is required');
     }
-
-    const videoExists = await this.prisma.video.findUnique({
+    const videoExists = (await this.prisma.video.findUnique({
       where: { id: videoId },
-    });
+    }))
+      ? true
+      : false;
 
     if (!videoExists) {
       throw new NotFoundException(`Video with id ${videoId} not found`);
@@ -34,5 +35,3 @@ export class VotesService {
     });
   }
 }
-
-

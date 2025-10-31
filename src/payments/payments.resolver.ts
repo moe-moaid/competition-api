@@ -13,4 +13,3 @@ export class PaymentsResolver {
     return this.paymentsService.createPaymentIntent(videoId, amount);
   }
 }
-

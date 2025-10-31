@@ -11,12 +11,20 @@ export async function seed(prisma: PrismaClient) {
     { country: 'Germany', address: '654 Berliner Str, Berlin, 10115' },
   ];
 
+  const socialMedia = [
+    { platform: 'youtube', link: 'https://guthib.com/' },
+    { platform: 'instagram', link: 'https://guthib.com/' },
+    { platform: 'twitter', link: 'https://guthib.com/' },
+    { platform: 'facebook', link: 'https://guthib.com/' },
+    { platform: 'tiktok', link: 'https://guthib.com/' },
+  ];
+
   const avatars = [
-    { url: "uploads/avatars/av-1.png"},
-    { url: "uploads/avatars/av-2.png"},
-    { url: "uploads/avatars/av-3.png"},
-    { url: "uploads/avatars/av-4.png"},
-    { url: "uploads/avatars/av-5.png"},
+    { url: 'uploads/avatars/av-1.png' },
+    { url: 'uploads/avatars/av-2.png' },
+    { url: 'uploads/avatars/av-3.png' },
+    { url: 'uploads/avatars/av-4.png' },
+    { url: 'uploads/avatars/av-5.png' },
   ];
 
   // Define Dummy Artists
@@ -27,6 +35,7 @@ export async function seed(prisma: PrismaClient) {
       email: 'alice.smith@example.com',
       phone: '123-456-7890',
       password: 'securepass123',
+      bio: 'Hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music...',
     },
     {
       name: 'Bob Johnson',
@@ -34,6 +43,7 @@ export async function seed(prisma: PrismaClient) {
       email: 'bob.johnson@example.com',
       phone: '234-567-8901',
       password: 'securepass456',
+      bio: 'Hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music...',
     },
     {
       name: 'Clara Lee',
@@ -41,6 +51,7 @@ export async function seed(prisma: PrismaClient) {
       email: 'clara.lee@example.com',
       phone: '345-678-9012',
       password: 'securepass789',
+      bio: 'Hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music...',
     },
     {
       name: 'David Brown',
@@ -48,6 +59,7 @@ export async function seed(prisma: PrismaClient) {
       email: 'david.brown@example.com',
       phone: '456-789-0123',
       password: 'securepass012',
+      bio: 'Hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music...',
     },
     {
       name: 'Emma Davis',
@@ -55,6 +67,7 @@ export async function seed(prisma: PrismaClient) {
       email: 'emma.davis@example.com',
       phone: '567-890-1234',
       password: 'securepass345',
+      bio: 'Hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music hey its me i love Music, hey its me i love Music hey its me i love Music hey its me i love Music...',
     },
   ];
 
@@ -66,14 +79,19 @@ export async function seed(prisma: PrismaClient) {
       data: locations[i],
     });
     const avatar = await prisma.avatar.create({
-        data: avatars[i],
-    })
+      data: avatars[i],
+    });
+
     const artist = await prisma.artist.create({
       data: {
         ...artistsData[i],
         locationId: location.id,
         avatarId: avatar.id,
+        socialMedia: {
+          create: socialMedia,
+        },
       },
+      include: { socialMedia: true },
     });
     artists.push(artist);
   }
@@ -105,9 +123,5 @@ export async function seed(prisma: PrismaClient) {
     });
   }
 
-  console.log(
-    '🌱 Seeding completed!',
-  );
+  console.log('🌱 Seeding completed!');
 }
-
-

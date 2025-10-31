@@ -1,4 +1,4 @@
-import { IsString, IsInt, IsNotEmpty, } from 'class-validator';
+import { IsString, IsInt, IsNotEmpty } from 'class-validator';
 
 export class CreateVideoDto {
   @IsString()
@@ -16,5 +16,4 @@ export class CreateVideoDto {
   @IsInt()
   @IsNotEmpty()
   artistId: number;
-  
 }

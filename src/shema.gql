@@ -2,15 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Artist {
+type SocialMedia {
   id: Int!
-  name: String!
-  age: Int
-  email: String!
-  phone: String!
-  password: String!
-  locationId: Int
-  avatarId: String!
+  platform: String!
+  link: String!
+}
+
+type Video {
+  id: Int!
+  title: String!
+  description: String!
+  category: String!
+  url: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -19,6 +22,22 @@ type Artist {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type Artist {
+  id: Int!
+  name: String!
+  age: Int
+  email: String!
+  phone: String!
+  bio: String!
+  password: String!
+  locationId: Int
+  socialMedias: [SocialMedia!]!
+  videos: [Video!]!
+  avatarId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
 
 type Vote {
   id: Int!
