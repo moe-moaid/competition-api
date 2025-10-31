@@ -29,19 +29,21 @@ model Video {
 }
 
 model Artist {
-  id         Int      @id @default(autoincrement())
-  name       String
-  age        Int?
-  email      String   @unique
-  phone      String
-  password   String
-  locationId Int      @unique
-  avatarId   Int      @unique
-  videos     Video[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  location   Location @relation(fields: [locationId], references: [id])
-  avatar     Avatar   @relation(fields: [avatarId], references: [id])
+  id          Int           @id @default(autoincrement())
+  name        String
+  age         Int?
+  email       String        @unique
+  phone       String
+  password    String
+  locationId  Int           @unique
+  avatarId    Int           @unique
+  socialMedia SocialMedia[]
+  videos      Video[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  location    Location      @relation(fields: [locationId], references: [id])
+  avatar      Avatar        @relation(fields: [avatarId], references: [id])
+  bio         String?
 }
 
 model Location {
@@ -76,6 +78,14 @@ model Payment {
   updatedAt             DateTime      @updatedAt
   vote                  Vote?         @relation(fields: [voteId], references: [id])
   voteId                Int?          @unique
+}
+
+model SocialMedia {
+  id       Int    @id @default(autoincrement())
+  platform String
+  link     String
+  artistId Int
+  artist   Artist @relation(fields: [artistId], references: [id])
 }
 
 enum PaymentStatus {

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "public"."Artist" ALTER COLUMN "bio" DROP NOT NULL,
+ALTER COLUMN "bio" DROP DEFAULT;
