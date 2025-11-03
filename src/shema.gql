@@ -35,6 +35,7 @@ type Artist {
   age: Int
   email: String!
   phone: String!
+  bio: String!
   password: String!
   locationId: Int
   location: ArtistLocation
@@ -44,11 +45,6 @@ type Artist {
   createdAt: DateTime!
   updatedAt: DateTime!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Vote {
   id: Int!

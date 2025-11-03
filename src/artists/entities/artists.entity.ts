@@ -18,6 +18,9 @@ export class Artist {
 
   @Field()
   phone: string;
+  
+  @Field()
+  bio: string;
 
   @Field()
   password: string;

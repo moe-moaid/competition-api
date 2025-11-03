@@ -22,7 +22,7 @@ import { StripeService } from './stripe/stripe.service';
     AvatarsModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'uploads'),
-      serveRoot: '/uploads'
+      serveRoot: '/uploads',
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
