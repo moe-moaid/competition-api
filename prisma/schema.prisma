@@ -15,32 +15,35 @@ datasource db {
 }
 
 model Video {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   title       String
   description String
   category    String
   url         String
   artistId    Int
-  artist      Artist   @relation(fields: [artistId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  artist      Artist    @relation(fields: [artistId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   Vote        Vote[]
+  Payment     Payment[]
 }
 
 model Artist {
-  id         Int      @id @default(autoincrement())
-  name       String
-  age        Int?
-  email      String   @unique
-  phone      String
-  password   String
-  locationId Int      @unique
-  avatarId   Int      @unique
-  videos     Video[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  location   Location @relation(fields: [locationId], references: [id])
-  avatar     Avatar   @relation(fields: [avatarId], references: [id])
+  id          Int           @id @default(autoincrement())
+  name        String
+  age         Int?
+  email       String        @unique
+  phone       String
+  password    String
+  locationId  Int           @unique
+  avatarId    Int           @unique
+  socialMedias SocialMedia[]
+  videos      Video[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  location    Location      @relation(fields: [locationId], references: [id])
+  avatar      Avatar        @relation(fields: [avatarId], references: [id])
+  bio         String?
 }
 
 model Location {
@@ -57,7 +60,37 @@ model Avatar {
 }
 
 model Vote {
-  id      Int   @id @default(autoincrement())
+  id      Int      @id @default(autoincrement())
   videoId Int
-  video   Video @relation(fields: [videoId], references: [id])
+  video   Video    @relation(fields: [videoId], references: [id])
+  payment Payment?
+}
+
+model Payment {
+  id                    String        @id @default(cuid())
+  videoId               Int
+  video                 Video         @relation(fields: [videoId], references: [id])
+  stripePaymentIntentId String        @unique
+  status                PaymentStatus @default(PENDING)
+  amount                Int
+  currency              String        @default("usd")
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  vote                  Vote?         @relation(fields: [voteId], references: [id])
+  voteId                Int?          @unique
+}
+
+model SocialMedia {
+  id       Int    @id @default(autoincrement())
+  platform String
+  link     String
+  artistId Int
+  artist   Artist @relation(fields: [artistId], references: [id])
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  CANCELLED
 }

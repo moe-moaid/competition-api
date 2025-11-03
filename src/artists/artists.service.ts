@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Artist } from '@prisma/client';
+import { Artist, Video } from '@prisma/client';
 
 @Injectable()
 export class ArtistsService {
@@ -10,7 +10,26 @@ export class ArtistsService {
     return this.prisma.artist.findMany({
       include: {
         videos: true,
+        location: true,
+        socialMedias: true,
       },
     });
+  }
+
+  async findVideosByArtistId(artistId: number): Promise<Video[]> {
+    return this.prisma.video.findMany({
+      where: { artistId },
+    });
+  }
+
+  async findSingleArtist(artistId: number): Promise<Artist> {
+    return this.prisma.artist.findUnique({
+      where: { id: artistId },
+      include: {
+        videos: true,
+        location: true,
+        socialMedias: true,
+      }
+    })
   }
 }
