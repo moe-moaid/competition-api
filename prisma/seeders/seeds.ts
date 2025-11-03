@@ -73,7 +73,11 @@ export async function seed(prisma: PrismaClient) {
         ...artistsData[i],
         locationId: location.id,
         avatarId: avatar.id,
+        socialMedias: {
+          create: socialMedia,
+        },
       },
+      include: { socialMedias: true },
     });
     artists.push(artist);
   }

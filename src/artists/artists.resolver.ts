@@ -1,4 +1,4 @@
-import { Resolver, Query } from '@nestjs/graphql';
+import { Resolver, Query, ResolveField, Parent, Args, Int } from '@nestjs/graphql';
 import { ArtistsService } from './artists.service';
 import { Artist } from './entities/artists.entity';
 
@@ -9,5 +9,15 @@ constructor(private readonly artistsService: ArtistsService) {}
   @Query(() => [Artist], { name: 'artists' })
   findAll() {
     return this.artistsService.findAll();
+  }
+
+ @Query(() => Artist, { name: 'artist' })
+  findOne(@Args('id', { type: () =>  Int }) id: number ) {
+    return this.artistsService.findSingleArtist(id);
+  }
+
+  @ResolveField(() => [Video], { name: 'videos' })
+  videos(@Parent() artist: Artist) {
+    return this.artistsService.findVideosByArtistId(artist.id);
   }
 }

@@ -1,4 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { SocialMedia } from './socialMedia.entity';
+import { Video } from 'src/videos/entities/video.entity';
+import { ArtistLocation } from './location.entity';
 @ObjectType()
 export class Artist {
   @Field(() => Int)
@@ -21,6 +24,15 @@ export class Artist {
 
   @Field(() => Int, { nullable: true })
   locationId?: number;
+
+  @Field(() => ArtistLocation, { nullable: true })
+  location?: ArtistLocation;
+
+  @Field(() => [SocialMedia])
+  socialMedias: SocialMedia[];
+
+  @Field(() => [Video])
+  videos: Video[];
 
   @Field()
   avatarId: string;
