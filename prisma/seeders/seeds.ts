@@ -12,11 +12,11 @@ export async function seed(prisma: PrismaClient) {
   ];
 
   const socialMedia = [
-    { platform: 'youtube', link: 'https://guthib.com/' },
-    { platform: 'instagram', link: 'https://guthib.com/' },
-    { platform: 'twitter', link: 'https://guthib.com/' },
-    { platform: 'facebook', link: 'https://guthib.com/' },
-    { platform: 'tiktok', link: 'https://guthib.com/' },
+    { platform: 'linkedIn', link: 'https://youtube.com/' },
+    { platform: 'instagram', link: 'https://youtube.com/' },
+    { platform: 'twitter', link: 'https://youtube.com/' },
+    { platform: 'facebook', link: 'https://youtube.com/' },
+    { platform: 'tiktok', link: 'https://youtube.com/' },
   ];
 
   const avatars = [
