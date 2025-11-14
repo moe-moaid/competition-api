@@ -12,6 +12,7 @@ export class ArtistsService {
         videos: true,
         location: true,
         socialMedias: true,
+        avatar: true,
       },
     });
   }
@@ -29,6 +30,7 @@ export class ArtistsService {
         videos: true,
         location: true,
         socialMedias: true,
+        avatar: true,
       }
     })
   }
