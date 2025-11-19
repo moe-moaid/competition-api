@@ -4,11 +4,11 @@ import { PrismaClient } from '@prisma/client';
 export async function seed(prisma: PrismaClient) {
   // Define Dummy Locations
   const locations = [
-    { country: 'USA', address: '123 Main St, New York, NY 10001' },
-    { country: 'UK', address: '456 High St, London, SW1A 1AA' },
-    { country: 'Canada', address: '789 Maple Ave, Toronto, ON M5V 2T6' },
-    { country: 'Australia', address: '321 Ocean Rd, Sydney, NSW 2000' },
-    { country: 'Germany', address: '654 Berliner Str, Berlin, 10115' },
+    { country: 'US', address: '123 Main St, New York, NY 10001' },
+    { country: 'GB', address: '456 High St, London, SW1A 1AA' },
+    { country: 'CA', address: '789 Maple Ave, Toronto, ON M5V 2T6' },
+    { country: 'AU', address: '321 Ocean Rd, Sydney, NSW 2000' },
+    { country: 'DE', address: '654 Berliner Str, Berlin, 10115' },
   ];
 
   const socialMedia = [
