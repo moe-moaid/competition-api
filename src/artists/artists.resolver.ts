@@ -7,12 +7,12 @@ import { Video } from 'src/videos/entities/video.entity';
 export class ArtistsResolver {
   constructor(private readonly artistsService: ArtistsService) {}
 
-  @Query(() => [Artist], { name: 'artists' })
+  @Query(() => [Artist], { name: 'artists', nullable: true })
   findAll() {
     return this.artistsService.findAll();
   }
 
- @Query(() => Artist, { name: 'artist' })
+ @Query(() => Artist, { name: 'artist', nullable: true })
   findOne(@Args('id', { type: () =>  Int }) id: number ) {
     return this.artistsService.findSingleArtist(id);
   }
