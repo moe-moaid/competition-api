@@ -58,8 +58,8 @@ type Vote {
 }
 
 type Query {
-  artists: [Artist!]!
-  artist(id: Int!): Artist!
+  artists: [Artist!]
+  artist(id: Int!): Artist
   votes: [Vote!]!
 }
 
