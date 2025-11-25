@@ -12,7 +12,7 @@ export class ArtistsResolver {
     return this.artistsService.findAll();
   }
 
- @Query(() => Artist, { name: 'artist', nullable: true })
+  @Query(() => Artist, { name: 'artist', nullable: true })
   findOne(@Args('id', { type: () =>  Int }) id: number ) {
     return this.artistsService.findSingleArtist(id);
   }

@@ -57,6 +57,11 @@ type Vote {
   videoId: Int!
 }
 
+type AuthResponse {
+  accessToken: String!
+  refreshToken: String!
+}
+
 type Query {
   artists: [Artist!]
   artist(id: Int!): Artist
@@ -66,4 +71,6 @@ type Query {
 type Mutation {
   castVote(videoId: Int!): Vote!
   createPaymentIntent(videoId: Int!, amount: Int): String!
+  signup(name: String!, email: String!, password: String!, phone: String!, country: String!, address: String!, avatar: Float!): AuthResponse!
+  login(email: String!, password: String!): AuthResponse!
 }
