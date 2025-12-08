@@ -13,7 +13,7 @@ import {
     async canActivate(context: ExecutionContext): Promise<boolean> {
       const req = context.switchToHttp().getRequest();
   
-      const token = req.cookies?.refreshToken; // httpOnly cookie
+      const token = req.cookies?.refreshToken; 
   
       if (!token) throw new UnauthorizedException('No refresh token');
   

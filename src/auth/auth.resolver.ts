@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Context } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { AuthResponse } from './dto/auth-response.dto';
 
@@ -28,7 +28,25 @@ export class AuthResolver {
   }
 
   @Mutation(() => AuthResponse)
-  login(@Args('email') email: string, @Args('password') password: string) {
-    return this.authService.login(email, password);
+  async login(
+    @Args('email') email: string,
+    @Args('password') password: string,
+    @Context() context,
+  ) {
+    const { accessToken, refreshToken } = await this.authService.login(
+      email,
+      password,
+    );
+
+    context.res.cookie('refresh_token', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+    });
+
+    return {
+      accessToken,
+    };
   }
 }

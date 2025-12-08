@@ -31,6 +31,7 @@ import { AuthModule } from './auth/auth.module';
       playground: true,
       introspection: true,
       path: '/api/data',
+      context: ({ req, res }) => ({ req, res })
     }),
     VotesModule,
     PaymentsModule,

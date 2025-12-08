@@ -59,7 +59,6 @@ type Vote {
 
 type AuthResponse {
   accessToken: String!
-  refreshToken: String!
 }
 
 type Query {
