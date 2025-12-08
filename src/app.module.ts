@@ -13,6 +13,7 @@ import { VotesService } from './votes/votes.service';
 import { VotesModule } from './votes/votes.module';
 import { PaymentsModule } from './payments/payments.module';
 import { StripeService } from './stripe/stripe.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,9 +31,11 @@ import { StripeService } from './stripe/stripe.service';
       playground: true,
       introspection: true,
       path: '/api/data',
+      context: ({ req, res }) => ({ req, res })
     }),
     VotesModule,
     PaymentsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, VotesService, StripeService],

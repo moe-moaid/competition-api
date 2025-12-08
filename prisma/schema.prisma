@@ -29,21 +29,22 @@ model Video {
 }
 
 model Artist {
-  id          Int           @id @default(autoincrement())
-  name        String
-  age         Int?
-  email       String        @unique
-  phone       String
-  password    String
-  locationId  Int           @unique
-  avatarId    Int           @unique
+  id           Int           @id @default(autoincrement())
+  name         String
+  age          Int?
+  email        String        @unique
+  phone        String
+  password     String
+  locationId   Int           @unique
+  avatarId     Int           @unique
   socialMedias SocialMedia[]
-  videos      Video[]
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  location    Location      @relation(fields: [locationId], references: [id])
-  avatar      Avatar        @relation(fields: [avatarId], references: [id])
-  bio         String?
+  videos       Video[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  location     Location      @relation(fields: [locationId], references: [id])
+  avatar       Avatar        @relation(fields: [avatarId], references: [id])
+  bio          String?
+  hashedRt     String?
 }
 
 model Location {
