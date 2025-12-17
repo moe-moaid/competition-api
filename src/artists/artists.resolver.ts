@@ -1,7 +1,9 @@
-import { Resolver, Query, ResolveField, Parent, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, ResolveField, Parent, Args, Int, Context } from '@nestjs/graphql';
 import { ArtistsService } from './artists.service';
 import { Artist } from './entities/artists.entity';
 import { Video } from 'src/videos/entities/video.entity';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 
 @Resolver(() => Artist)
 export class ArtistsResolver {
@@ -21,4 +23,11 @@ export class ArtistsResolver {
   videos(@Parent() artist: Artist) {
     return this.artistsService.findVideosByArtistId(artist.id);
   }
+
+  @Query(() => Artist)
+  @UseGuards(JwtAuthGuard)
+  me(@Context() { req }) {
+    return this.artistsService.findSingleArtist(req.user.sub);
+  }
+
 }
